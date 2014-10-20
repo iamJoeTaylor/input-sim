@@ -1,0 +1,31 @@
+{
+  "name": "input-sim",
+  "version": "1.0.0",
+  "description": "Simulate keyboard events and selection ranges for inputs",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamJoeTaylor/input-sim.git"
+  },
+  "keywords": [
+    "input",
+    "input-sim",
+    "range"
+  ],
+  "author": "Brian Donovan & Joe Taylor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamJoeTaylor/input-sim/issues"
+  },
+  "homepage": "https://github.com/iamJoeTaylor/input-sim",
+  "devDependencies": {
+    "es6-module-transpiler": "^0.8.3",
+    "esnext": "^0.11.1",
+    "jsdom": "^1.0.3",
+    "jshint": "^2.5.6",
+    "keysim": "^1.0.1"
+  }
+}
