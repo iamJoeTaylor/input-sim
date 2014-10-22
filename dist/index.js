@@ -818,15 +818,13 @@
 
         rightWordBreakIndexes: {
           value: function() {
-            var value = (arguments[0] !== void 0 ? arguments[0] : this._value);
             var result = [];
-
-            for (var i = 0, l = value.length; i <= l; i++) {
-              if (tmp$index$$hasRightWordBreakAtIndex(value, i)) {
+            var text = this._value;
+            for (var i = 0, l = text.length; i <= l; i++) {
+              if (tmp$index$$hasRightWordBreakAtIndex(text, i)) {
                 result.push(i + 1);
               }
             }
-
             return result;
           },
 
