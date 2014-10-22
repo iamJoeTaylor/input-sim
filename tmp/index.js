@@ -631,13 +631,15 @@ var InputSim = function() {
 
     rightWordBreakIndexes: {
       value: function() {
+        var value = (arguments[0] !== void 0 ? arguments[0] : this._value);
         var result = [];
-        var text = this._value;
-        for (var i = 0, l = text.length; i <= l; i++) {
-          if (hasRightWordBreakAtIndex(text, i)) {
+
+        for (var i = 0, l = value.length; i <= l; i++) {
+          if (hasRightWordBreakAtIndex(value, i)) {
             result.push(i + 1);
           }
         }
+
         return result;
       },
 
