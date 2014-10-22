@@ -72,7 +72,7 @@ var InputSim = function() {
     this.selectionAffinity = Affinity.NONE;
 
     if(value) {
-      this.setValue(value);
+      this.setText(value);
     }
     if(range) {
       this.setSelectedRange(range);
@@ -227,6 +227,24 @@ var InputSim = function() {
       writable: true
     },
 
+    insertText: {
+      value: function(text) {
+        var range;
+        if (this.hasSelection()) {
+          this.clearSelection();
+        }
+
+        this.replaceSelection(text);
+        range = this.selectedRange();
+        range.start += range.length;
+        range.length = 0;
+        this.setSelectedRange(range);
+      },
+
+      enumerable: false,
+      writable: true
+    },
+
     moveUp: {
       value: function(event) {
         this._handleEvent(event);
@@ -324,7 +342,7 @@ var InputSim = function() {
         this._handleEvent(event);
         // 12|34 56|78  =>  1234 5678|
         var range = {
-          start: this._value.length,
+          start: this.text().length,
           length: 0
         };
         this.setSelectedRangeWithAffinity(range, Affinity.NONE);
@@ -347,7 +365,7 @@ var InputSim = function() {
       value: function(event) {
         this._handleEvent(event);
         var range = this.selectedRange();
-        var end = this._value.length;
+        var end = this.text().length;
         if (this.selectionAffinity === Affinity.UPSTREAM) {
           range.start += range.length;
         }
@@ -367,7 +385,7 @@ var InputSim = function() {
           case Affinity.DOWNSTREAM:
           case Affinity.NONE:
             // 12|34 56>78  =>  12|34 5678>
-            range.length = this._value.length - range.start;
+            range.length = this.text().length - range.start;
             break;
           case Affinity.UPSTREAM:
             // 12<34 56|78  =>  12|34 5678
@@ -396,7 +414,7 @@ var InputSim = function() {
       value: function(event) {
         this._handleEvent(event);
         var range = this.selectedRange();
-        range.length = this._value.length - range.start;
+        range.length = this.text().length - range.start;
         this.setSelectedRangeWithAffinity(range, Affinity.DOWNSTREAM);
       },
 
@@ -580,7 +598,7 @@ var InputSim = function() {
     moveToEndOfLine: {
       value: function(event) {
         this._handleEvent(event);
-        this.setSelectedRange({ start: this._value.length, length: 0 });
+        this.setSelectedRange({ start: this.text().length, length: 0 });
       },
 
       enumerable: false,
@@ -591,7 +609,7 @@ var InputSim = function() {
       value: function(event) {
         this._handleEvent(event);
         var range = this.selectedRange();
-        range.length = this._value.length - range.start;
+        range.length = this.text().length - range.start;
         this.setSelectedRangeWithAffinity(range, Affinity.DOWNSTREAM);
       },
 
@@ -618,10 +636,10 @@ var InputSim = function() {
       value: function(replacement) {
         var range = this.selectedRange();
         var end = range.start + range.length;
-        var text = this._value;
+        var text = this.text();
         text = text.substring(0, range.start) + replacement + text.substring(end);
         range.length = replacement.length;
-        this.setValue(text);
+        this.setText(text);
         this.setSelectedRangeWithAffinity(range, Affinity.NONE);
       },
 
@@ -632,7 +650,7 @@ var InputSim = function() {
     rightWordBreakIndexes: {
       value: function() {
         var result = [];
-        var text = this._value;
+        var text = this.text();
         for (var i = 0, l = text.length; i <= l; i++) {
           if (hasRightWordBreakAtIndex(text, i)) {
             result.push(i + 1);
@@ -650,7 +668,7 @@ var InputSim = function() {
         this._handleEvent(event);
         this.setSelectedRangeWithAffinity({
           start: 0,
-          length: this._value.length
+          length: this.text().length
         }, Affinity.NONE);
       },
 
@@ -658,19 +676,16 @@ var InputSim = function() {
       writable: true
     },
 
-    value: {
+    text: {
       value: function() {
-        return {
-          value: this._value,
-          selectedRange: this.selectedRange()
-        }
+        return this._value;
       },
 
       enumerable: false,
       writable: true
     },
 
-    setValue: {
+    setText: {
       value: function(value) {
         this._value = '' + value;
       },
@@ -700,7 +715,7 @@ var InputSim = function() {
     setSelectedRangeWithAffinity: {
       value: function(range, affinity) {
         var min = 0;
-        var max = this._value.length;
+        var max = this.text().length;
         var caret = {
           start: Math.max(min, Math.min(max, range.start)),
           end: Math.max(min, Math.min(max, range.start + range.length))
@@ -710,6 +725,7 @@ var InputSim = function() {
           length: caret.end - caret.start
         }
         this.selectionAffinity = range.length === 0 ? Affinity.NONE : affinity;
+        return this._selectedRange;
       },
 
       enumerable: false,
@@ -782,7 +798,7 @@ var InputSim = function() {
     _leftWordBreakIndexes: {
       value: function() {
         var result = [];
-        var text = this._value;
+        var text = this.text();
         for (var i = 0, l = text.length; i < l; i++) {
           if (hasLeftWordBreakAtIndex(text, i)) {
             result.push(i);
