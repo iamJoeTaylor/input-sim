@@ -617,21 +617,6 @@ var InputSim = function() {
       writable: true
     },
 
-    readSelectionFromPasteboard: {
-      value: function(pasteboard) {
-        var range, text;
-        text = pasteboard.getData('Text');
-        this.replaceSelection(text);
-        range = this.selectedRange();
-        range.start += range.length;
-        range.length = 0;
-        this.setSelectedRange(range);
-      },
-
-      enumerable: false,
-      writable: true
-    },
-
     replaceSelection: {
       value: function(replacement) {
         var range = this.selectedRange();
@@ -651,7 +636,7 @@ var InputSim = function() {
       value: function() {
         var result = [];
         var text = this.text();
-        for (var i = 0, l = text.length; i <= l; i++) {
+        for (var i = 0, l = text.length; i < l; i++) {
           if (hasRightWordBreakAtIndex(text, i)) {
             result.push(i + 1);
           }
@@ -688,6 +673,10 @@ var InputSim = function() {
     setText: {
       value: function(value) {
         this._value = '' + value;
+        this.setSelectedRange({
+          start: this._value.length,
+          length: 0
+        });
       },
 
       enumerable: false,
