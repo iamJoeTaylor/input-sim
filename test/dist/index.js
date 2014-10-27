@@ -887,6 +887,18 @@
 
           tmp$index$$expect(input.rightWordBreakIndexes()).to.be.eql([4, 9, 12, 16, 21]);
         });
+
+        it('gets word breaks length one char', function() {
+          var input = tmp$index$$setInput('|j');
+
+          tmp$index$$expect(input.rightWordBreakIndexes()).to.be.eql([1]);
+        });
+
+        it('gets word breaks length one symbol', function() {
+          var input = tmp$index$$setInput('|+');
+
+          tmp$index$$expect(input.rightWordBreakIndexes()).to.be.eql([1]);
+        });
       });
 
       describe('#selectAll', function() {

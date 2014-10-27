@@ -239,7 +239,7 @@
      * @private
      */
     function tmp$index$$hasRightWordBreakAtIndex(text, index) {
-      if (index === text.length) {
+      if (index === text.length - 1) {
         return true;
       } else {
         return tmp$index$$isWordChar(text[index]) && !tmp$index$$isWordChar(text[index + 1]);
