@@ -2,9 +2,11 @@ import chai from './chai';
 import InputSim from './input-sim';
 import Selection from './selection';
 
+var Input = InputSim.Input;
+
 var expect = chai.expect;
 var setInput = function(description, input) {
-  var _input = input || new InputSim();
+  var _input = input || new Input();
 
   var selection = Selection.parseDescription(description);
   _input.setText(selection.value);
@@ -19,15 +21,15 @@ var setInput = function(description, input) {
 describe('Basic Functionality', function() {
   describe('initialization', function() {
     it('initializes with nothing', function() {
-      var input = new InputSim();
+      var input = new Input();
       expect(input.text()).to.equal('');
     });
     it('initializes with a value', function() {
-      var input = new InputSim('Joe');
+      var input = new Input('Joe');
       expect(input.text()).to.equal('Joe');
     });
     it('initializes with a value and a range', function() {
-      var input = new InputSim('Joe Taylor', {
+      var input = new Input('Joe Taylor', {
         start: 3,
         length: 7
       });

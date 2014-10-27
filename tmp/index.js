@@ -59,10 +59,10 @@ function hasRightWordBreakAtIndex(text, index) {
   }
 }
 
-var InputSim = function() {
+var Input = function() {
   "use strict";
 
-  function InputSim(value, range) {
+  function Input(value, range) {
     this._value = '';
     this._selectedRange = {
       start: 0,
@@ -80,7 +80,7 @@ var InputSim = function() {
     this._buildKeybindings();
   }
 
-  $__Object$defineProperties(InputSim.prototype, {
+  $__Object$defineProperties(Input.prototype, {
     clearSelection: {
       value: function() {
         this.replaceSelection('');
@@ -820,8 +820,14 @@ var InputSim = function() {
     }
   });
 
-  return InputSim;
+  return Input;
 }();
+
+var InputSim = {
+  Input: Input,
+  KEYS: KEYS,
+  keyBindingsForPlatform: keyBindingsForPlatform
+};
 
 if (typeof define === 'function' && define.amd) {
   define(function() { return InputSim; });

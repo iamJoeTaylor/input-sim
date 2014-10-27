@@ -246,10 +246,10 @@
       }
     }
 
-    var tmp$index$$InputSim = function() {
+    var tmp$index$$Input = function() {
       "use strict";
 
-      function InputSim(value, range) {
+      function Input(value, range) {
         this._value = '';
         this._selectedRange = {
           start: 0,
@@ -267,7 +267,7 @@
         this._buildKeybindings();
       }
 
-      tmp$index$$$__Object$defineProperties(InputSim.prototype, {
+      tmp$index$$$__Object$defineProperties(Input.prototype, {
         clearSelection: {
           value: function() {
             this.replaceSelection('');
@@ -1007,8 +1007,14 @@
         }
       });
 
-      return InputSim;
+      return Input;
     }();
+
+    var tmp$index$$InputSim = {
+      Input: tmp$index$$Input,
+      KEYS: $$keybindings$$KEYS,
+      keyBindingsForPlatform: $$keybindings$$keyBindingsForPlatform
+    };
 
     if (typeof define === 'function' && define.amd) {
       define(function() { return tmp$index$$InputSim; });

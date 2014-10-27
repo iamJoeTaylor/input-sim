@@ -29,9 +29,11 @@
     var $$chai$$default = chai;
     var $$input$sim$$default = InputSim;
 
+    var tmp$index$$Input = $$input$sim$$default.Input;
+
     var tmp$index$$expect = $$chai$$default.expect;
     var tmp$index$$setInput = function(description, input) {
-      var _input = input || new $$input$sim$$default();
+      var _input = input || new tmp$index$$Input();
 
       var selection = $$selection$$default.parseDescription(description);
       _input.setText(selection.value);
@@ -46,15 +48,15 @@
     describe('Basic Functionality', function() {
       describe('initialization', function() {
         it('initializes with nothing', function() {
-          var input = new $$input$sim$$default();
+          var input = new tmp$index$$Input();
           tmp$index$$expect(input.text()).to.equal('');
         });
         it('initializes with a value', function() {
-          var input = new $$input$sim$$default('Joe');
+          var input = new tmp$index$$Input('Joe');
           tmp$index$$expect(input.text()).to.equal('Joe');
         });
         it('initializes with a value and a range', function() {
-          var input = new $$input$sim$$default('Joe Taylor', {
+          var input = new tmp$index$$Input('Joe Taylor', {
             start: 3,
             length: 7
           });
