@@ -1,10 +1,16 @@
 NPMBIN = $(shell npm bin)
 
-all: clean dist test
+all: clean dist test docs
 
 ESNEXT = find . -name '*.js' && $(NPMBIN)/esnext -o ../tmp $$(find . -name '*.js')
 
 MODULES = $(NPMBIN)/compile-modules convert -I tmp -f bundle -o dist/index.js tmp/index.js
+
+docs: clean-docs
+	$(NPMBIN)/jsdoc -r lib -d docs
+
+clean-docs:
+	rm -rf docs
 
 lib:
 	cd lib && $(ESNEXT)

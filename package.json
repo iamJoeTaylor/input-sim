@@ -4,6 +4,7 @@
   "description": "Simulate keyboard events and selection ranges for inputs",
   "main": "lib/index.js",
   "scripts": {
+    "build": "make",
     "test": "make test"
   },
   "repository": {
@@ -28,12 +29,10 @@
     "chai": "^1.9.2",
     "es6-module-transpiler": "^0.8.3",
     "esnext": "^0.11.1",
-    "jsdom": "^1.0.3",
-    "jshint": "^2.5.6",
+    "jsdoc": "git://github.com/eventualbuddha/jsdoc.git#add-support-for-es6-classes",
     "karma": "^0.12.24",
     "karma-mocha": "^0.1.9",
     "karma-phantomjs-launcher": "^0.1.4",
-    "keysim": "^1.0.1",
     "mocha": "^2.0.1",
     "string-selection": "^1.0.0"
   }
