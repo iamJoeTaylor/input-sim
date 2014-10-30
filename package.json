@@ -1,8 +1,8 @@
 {
   "name": "input-sim",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simulate keyboard events and selection ranges for inputs",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "make",
     "test": "make test"
