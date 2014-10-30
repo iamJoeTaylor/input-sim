@@ -380,7 +380,8 @@
               throw new Error('cannot handle and event that isn\'t passed');
             }
             var action = this._bindings.actionForEvent(event);
-            this[action](event);
+            if(action) this[action](event);
+            return action;
           },
 
           enumerable: false,
