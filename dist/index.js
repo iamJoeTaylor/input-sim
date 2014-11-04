@@ -186,7 +186,7 @@
 
       return BindingSet;
     }();
-    var tmp$index$$$__Object$defineProperties = Object.defineProperties;
+    var $$index$$$__Object$defineProperties = Object.defineProperties;
 
     /**
      * Enum for text direction affinity.
@@ -195,7 +195,7 @@
      * @enum {number}
      * @private
      */
-    var tmp$index$$Affinity = {
+    var $$index$$Affinity = {
       UPSTREAM: 0,
       DOWNSTREAM: 1,
       NONE: null
@@ -208,7 +208,7 @@
      * @returns {boolean}
      * @private
      */
-    function tmp$index$$isWordChar(chr) {
+    function $$index$$isWordChar(chr) {
       return chr && /^\w$/.test(chr);
     }
 
@@ -221,11 +221,11 @@
      * @returns {boolean}
      * @private
      */
-    function tmp$index$$hasLeftWordBreakAtIndex(text, index) {
+    function $$index$$hasLeftWordBreakAtIndex(text, index) {
       if (index === 0) {
         return true;
       } else {
-        return !tmp$index$$isWordChar(text[index - 1]) && tmp$index$$isWordChar(text[index]);
+        return !$$index$$isWordChar(text[index - 1]) && $$index$$isWordChar(text[index]);
       }
     }
 
@@ -238,15 +238,15 @@
      * @returns {boolean}
      * @private
      */
-    function tmp$index$$hasRightWordBreakAtIndex(text, index) {
+    function $$index$$hasRightWordBreakAtIndex(text, index) {
       if (index === text.length - 1) {
         return true;
       } else {
-        return tmp$index$$isWordChar(text[index]) && !tmp$index$$isWordChar(text[index + 1]);
+        return $$index$$isWordChar(text[index]) && !$$index$$isWordChar(text[index + 1]);
       }
     }
 
-    var tmp$index$$Input = function() {
+    var $$index$$Input = function() {
       "use strict";
 
       function Input(value, range) {
@@ -256,7 +256,7 @@
           length: 0
         };
         this.shouldCancelEvents = true;
-        this.selectionAffinity = tmp$index$$Affinity.NONE;
+        this.selectionAffinity = $$index$$Affinity.NONE;
 
         if(value) {
           this.setText(value);
@@ -267,7 +267,7 @@
         this._buildKeybindings();
       }
 
-      tmp$index$$$__Object$defineProperties(Input.prototype, {
+      $$index$$$__Object$defineProperties(Input.prototype, {
         clearSelection: {
           value: function() {
             this.replaceSelection('');
@@ -460,19 +460,19 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
-              case tmp$index$$Affinity.NONE:
+              case $$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.NONE:
                 // 12<34 56|78  =>  <1234 56|78
                 range.length += range.start;
                 range.start = 0;
                 break;
-              case tmp$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.DOWNSTREAM:
                 // 12|34 56>78   =>   <12|34 5678
                 range.length = range.start;
                 range.start = 0;
                 break;
             }
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.UPSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.UPSTREAM);
           },
 
           enumerable: false,
@@ -484,18 +484,18 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
-              case tmp$index$$Affinity.NONE:
+              case $$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.NONE:
                 // 12<34 56|78  =>  <1234 56|78
                 range.length += range.start;
                 range.start = 0;
                 break;
-              case tmp$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.DOWNSTREAM:
                 // 12|34 56>78  =>  12|34 5678
                 range.length = 0;
                 break;
             }
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.UPSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.UPSTREAM);
           },
 
           enumerable: false,
@@ -518,7 +518,7 @@
             var range = this.selectedRange();
             range.length += range.start;
             range.start = 0;
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.UPSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.UPSTREAM);
           },
 
           enumerable: false,
@@ -533,7 +533,7 @@
               start: this.text().length,
               length: 0
             };
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.NONE);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.NONE);
           },
 
           enumerable: false,
@@ -554,11 +554,11 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             var end = this.text().length;
-            if (this.selectionAffinity === tmp$index$$Affinity.UPSTREAM) {
+            if (this.selectionAffinity === $$index$$Affinity.UPSTREAM) {
               range.start += range.length;
             }
             range.length = end - range.start;
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.DOWNSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.DOWNSTREAM);
           },
 
           enumerable: false,
@@ -570,18 +570,18 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.DOWNSTREAM:
-              case tmp$index$$Affinity.NONE:
+              case $$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.NONE:
                 // 12|34 56>78  =>  12|34 5678>
                 range.length = this.text().length - range.start;
                 break;
-              case tmp$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.UPSTREAM:
                 // 12<34 56|78  =>  12|34 5678
                 range.start += range.length;
                 range.length = 0;
                 break;
             }
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.DOWNSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.DOWNSTREAM);
           },
 
           enumerable: false,
@@ -603,7 +603,7 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             range.length = this.text().length - range.start;
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.DOWNSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.DOWNSTREAM);
           },
 
           enumerable: false,
@@ -619,7 +619,7 @@
             } else {
               range.start--;
             }
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.NONE);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.NONE);
           },
 
           enumerable: false,
@@ -631,13 +631,13 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
-              case tmp$index$$Affinity.NONE:
-                this.selectionAffinity = tmp$index$$Affinity.UPSTREAM;
+              case $$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.NONE:
+                this.selectionAffinity = $$index$$Affinity.UPSTREAM;
                 range.start--;
                 range.length++;
                 break;
-              case tmp$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.DOWNSTREAM:
                 range.length--;
                 break;
             }
@@ -664,14 +664,14 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
-              case tmp$index$$Affinity.NONE:
-                this.selectionAffinity = tmp$index$$Affinity.UPSTREAM;
+              case $$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.NONE:
+                this.selectionAffinity = $$index$$Affinity.UPSTREAM;
                 var start = this._lastWordBreakBeforeIndex(range.start - 1);
                 range.length += range.start - start;
                 range.start = start;
                 break;
-              case tmp$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.DOWNSTREAM:
                 var end = this._lastWordBreakBeforeIndex(range.start + range.length);
                 if (end < range.start) {
                   end = range.start;
@@ -702,7 +702,7 @@
             var range = this.selectedRange();
             range.length += range.start;
             range.start = 0;
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.UPSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.UPSTREAM);
           },
 
           enumerable: false,
@@ -719,7 +719,7 @@
             } else {
               range.start++;
             }
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.NONE);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.NONE);
           },
 
           enumerable: false,
@@ -731,13 +731,13 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.UPSTREAM:
                 range.start++;
                 range.length--;
                 break;
-              case tmp$index$$Affinity.DOWNSTREAM:
-              case tmp$index$$Affinity.NONE:
-                this.selectionAffinity = tmp$index$$Affinity.DOWNSTREAM;
+              case $$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.NONE:
+                this.selectionAffinity = $$index$$Affinity.DOWNSTREAM;
                 range.length++;
                 break;
             }
@@ -767,12 +767,12 @@
             var start = range.start;
             var end = range.start + range.length;
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.UPSTREAM:
                 start = Math.min(this._nextWordBreakAfterIndex(start), end);
                 break;
-              case tmp$index$$Affinity.DOWNSTREAM:
-              case tmp$index$$Affinity.NONE:
-                this.selectionAffinity = tmp$index$$Affinity.DOWNSTREAM;
+              case $$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.NONE:
+                this.selectionAffinity = $$index$$Affinity.DOWNSTREAM;
                 end = this._nextWordBreakAfterIndex(range.start + range.length);
                 break;
             }
@@ -798,7 +798,7 @@
             this._handleEvent(event);
             var range = this.selectedRange();
             range.length = this.text().length - range.start;
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.DOWNSTREAM);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.DOWNSTREAM);
           },
 
           enumerable: false,
@@ -813,7 +813,7 @@
             text = text.substring(0, range.start) + replacement + text.substring(end);
             range.length = replacement.length;
             this.setText(text);
-            this.setSelectedRangeWithAffinity(range, tmp$index$$Affinity.NONE);
+            this.setSelectedRangeWithAffinity(range, $$index$$Affinity.NONE);
           },
 
           enumerable: false,
@@ -825,7 +825,7 @@
             var result = [];
             var text = this.text();
             for (var i = 0, l = text.length; i < l; i++) {
-              if (tmp$index$$hasRightWordBreakAtIndex(text, i)) {
+              if ($$index$$hasRightWordBreakAtIndex(text, i)) {
                 result.push(i + 1);
               }
             }
@@ -842,7 +842,7 @@
             this.setSelectedRangeWithAffinity({
               start: 0,
               length: this.text().length
-            }, tmp$index$$Affinity.NONE);
+            }, $$index$$Affinity.NONE);
           },
 
           enumerable: false,
@@ -901,7 +901,7 @@
               start: caret.start,
               length: caret.end - caret.start
             }
-            this.selectionAffinity = range.length === 0 ? tmp$index$$Affinity.NONE : affinity;
+            this.selectionAffinity = range.length === 0 ? $$index$$Affinity.NONE : affinity;
             return this._selectedRange;
           },
 
@@ -913,12 +913,12 @@
           value: function() {
             var range = this.selectedRange();
             switch (this.selectionAffinity) {
-              case tmp$index$$Affinity.UPSTREAM:
+              case $$index$$Affinity.UPSTREAM:
                 return range.start + range.length;
-              case tmp$index$$Affinity.DOWNSTREAM:
+              case $$index$$Affinity.DOWNSTREAM:
                 return range.start;
               default:
-                return tmp$index$$Affinity.NONE;
+                return $$index$$Affinity.NONE;
             }
           },
 
@@ -977,7 +977,7 @@
             var result = [];
             var text = this.text();
             for (var i = 0, l = text.length; i < l; i++) {
-              if (tmp$index$$hasLeftWordBreakAtIndex(text, i)) {
+              if ($$index$$hasLeftWordBreakAtIndex(text, i)) {
                 result.push(i);
               }
             }
@@ -1011,20 +1011,20 @@
       return Input;
     }();
 
-    var tmp$index$$InputSim = {
-      Input: tmp$index$$Input,
+    var input$sim$umd$$InputSim = {
+      Input: $$index$$Input,
       KEYS: $$keybindings$$KEYS,
       keyBindingsForPlatform: $$keybindings$$keyBindingsForPlatform
     };
 
     if (typeof define === 'function' && define.amd) {
-      define(function() { return tmp$index$$InputSim; });
+      define(function() { return input$sim$umd$$InputSim; });
     } else if (typeof module !== 'undefined' && module.exports) {
-      module.exports = tmp$index$$InputSim;
+      module.exports = input$sim$umd$$InputSim;
     } else if (typeof window !== 'undefined') {
-      window.InputSim = tmp$index$$InputSim;
+      window.InputSim = input$sim$umd$$InputSim;
     } else {
-      this.InputSim = tmp$index$$InputSim;
+      this.InputSim = input$sim$umd$$InputSim;
     }
 }).call(this);
 

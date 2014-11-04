@@ -3,6 +3,7 @@
   "version": "2.0.4",
   "description": "Simulate keyboard events and selection ranges for inputs",
   "main": "dist/index.js",
+  "jsnext:main": "lib/index.js",
   "scripts": {
     "build": "make",
     "test": "make test"
