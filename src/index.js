@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: index.js</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Source: index.js</h1>
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { KEYS, keyBindingsForPlatform } from './keybindings';
+import { KEYS, keyBindingsForPlatform } from './keybindings';
 
 /**
  * Enum for text direction affinity.
@@ -49,7 +21,7 @@ var Affinity = {
  * @private
  */
 function isWordChar(chr) {
-  return chr &amp;&amp; /^\w$/.test(chr);
+  return chr && /^\w$/.test(chr);
 }
 
 /**
@@ -65,7 +37,7 @@ function hasLeftWordBreakAtIndex(text, index) {
   if (index === 0) {
     return true;
   } else {
-    return !isWordChar(text[index - 1]) &amp;&amp; isWordChar(text[index]);
+    return !isWordChar(text[index - 1]) && isWordChar(text[index]);
   }
 }
 
@@ -82,7 +54,7 @@ function hasRightWordBreakAtIndex(text, index) {
   if (index === text.length - 1) {
     return true;
   } else {
-    return isWordChar(text[index]) &amp;&amp; !isWordChar(text[index + 1]);
+    return isWordChar(text[index]) && !isWordChar(text[index + 1]);
   }
 }
 
@@ -396,17 +368,17 @@ class Input {
    *     // rightward selections are shrunk
    *     // Hey guys, |where> are you?
    *     moveUpAndModifySelection(event);
-   *     // &lt;Hey guys, |where are you?
+   *     // <Hey guys, |where are you?
    *
    *     // leftward selections are extended
-   *     // Hey guys, &lt;where| are you?
+   *     // Hey guys, <where| are you?
    *     moveUpAndModifySelection(event);
-   *     // &lt;Hey guys, where| are you?
+   *     // <Hey guys, where| are you?
    *
    *     // neutral selections are extended
    *     // Hey guys, |where| are you?
    *     moveUpAndModifySelection(event);
-   *     // &lt;Hey guys, where| are you?
+   *     // <Hey guys, where| are you?
    *
    * @param {Event} event
    */
@@ -416,12 +388,12 @@ class Input {
     switch (this.selectionAffinity) {
       case Affinity.UPSTREAM:
       case Affinity.NONE:
-        // 12&lt;34 56|78  =>  &lt;1234 56|78
+        // 12<34 56|78  =>  <1234 56|78
         range.length += range.start;
         range.start = 0;
         break;
       case Affinity.DOWNSTREAM:
-        // 12|34 56>78   =>   &lt;12|34 5678
+        // 12|34 56>78   =>   <12|34 5678
         range.length = range.start;
         range.start = 0;
         break;
@@ -441,7 +413,7 @@ class Input {
     switch (this.selectionAffinity) {
       case Affinity.UPSTREAM:
       case Affinity.NONE:
-        // 12&lt;34 56|78  =>  &lt;1234 56|78
+        // 12<34 56|78  =>  <1234 56|78
         range.length += range.start;
         range.start = 0;
         break;
@@ -525,7 +497,7 @@ class Input {
    *
    * @example
    *     // leftward selections are shrunk
-   *     // Hey guys, &lt;where| are you?
+   *     // Hey guys, <where| are you?
    *     moveDownAndModifySelection(event)
    *     // Hey guys, where| are you?>
    *
@@ -568,7 +540,7 @@ class Input {
         range.length = this.text().length - range.start;
         break;
       case Affinity.UPSTREAM:
-        // 12&lt;34 56|78  =>  12|34 5678
+        // 12<34 56|78  =>  12|34 5678
         range.start += range.length;
         range.length = 0;
         break;
@@ -631,12 +603,12 @@ class Input {
    *     // no selection just selects to the left
    *     // Hey guys|
    *     moveLeftAndModifySelection(event)
-   *     // Hey guy&lt;s|
+   *     // Hey guy<s|
    *
    *     // left selections are extended
-   *     // Hey &lt;guys|
+   *     // Hey <guys|
    *     moveLeftAndModifySelection(event)
-   *     // Hey&lt; guys|
+   *     // Hey< guys|
    *
    *     // right selections are shrunk
    *     // Hey |guys>
@@ -646,7 +618,7 @@ class Input {
    *     // neutral selections are extended
    *     // Hey |guys|
    *     moveLeftAndModifySelection(event)
-   *     //Hey&lt; guys|
+   *     //Hey< guys|
    *
    * @param {Event} event
    */
@@ -697,12 +669,12 @@ class Input {
    *     // no selection just selects to the left
    *     // Hey guys|
    *     moveWordLeftAndModifySelection(event)
-   *     // Hey &lt;guys|
+   *     // Hey <guys|
    *
    *     // left selections are extended
-   *     // Hey &lt;guys|
+   *     // Hey <guys|
    *     moveWordLeftAndModifySelection(event)
-   *     // &lt;Hey guys|
+   *     // <Hey guys|
    *
    *     // right selections are shrunk
    *     // |Hey guys>
@@ -712,7 +684,7 @@ class Input {
    *     // neutral selections are extended
    *     // Hey |guys|
    *     moveWordLeftAndModifySelection(event)
-   *     // &lt;Hey guys|
+   *     // <Hey guys|
    *
    * @param {Event} event
    */
@@ -729,7 +701,7 @@ class Input {
         break;
       case Affinity.DOWNSTREAM:
         var end = this._lastWordBreakBeforeIndex(range.start + range.length);
-        if (end &lt; range.start) {
+        if (end < range.start) {
           end = range.start;
         }
         range.length -= range.start + range.length - end;
@@ -759,11 +731,11 @@ class Input {
    * @example
    *     // Hey guys, where| are ya?
    *     moveToBeginningOfLineAndModifySelection(event)
-   *     // &lt;Hey guys, where| are ya?
+   *     // <Hey guys, where| are ya?
    *
    *     // Hey guys, where| are> ya?
    *     moveToBeginningOfLineAndModifySelection(event)
-   *     // &lt;Hey guys, where are| ya?
+   *     // <Hey guys, where are| ya?
    *
    * @param {Event} event
    */
@@ -818,9 +790,9 @@ class Input {
    *     // Hey |guy>s
    *
    *     // left selections are shrunk
-   *     // &lt;Hey |guys
+   *     // <Hey |guys
    *     moveRightAndModifySelection(event)
-   *     // H&lt;ey |guys
+   *     // H<ey |guys
    *
    *     // neutral selections are extended
    *     // |Hey| guys
@@ -884,9 +856,9 @@ class Input {
    *     // Hey |guys>
    *
    *     // left selections are shrunk
-   *     // He&lt;y |guys
+   *     // He<y |guys
    *     moveWordRightAndModifySelection(event)
-   *     // Hey&lt; |guys
+   *     // Hey< |guys
    *
    *     // neutral selections are extended
    *     // He|y |guys
@@ -936,7 +908,7 @@ class Input {
    *     moveToEndOfLineAndModifySelection(event)
    *     // Hey guys, where| are ya?>
    *
-   *     // Hey guys, &lt;where| are ya?
+   *     // Hey guys, <where| are ya?
    *     moveToEndOfLineAndModifySelection(event)
    *     // Hey guys, |where are ya?>
    *
@@ -982,7 +954,7 @@ class Input {
   rightWordBreakIndexes() {
     var result = [];
     var text = this.text();
-    for (var i = 0, l = text.length; i &lt; l; i++) {
+    for (var i = 0, l = text.length; i < l; i++) {
       if (hasRightWordBreakAtIndex(text, i)) {
         result.push(i + 1);
       }
@@ -1115,7 +1087,7 @@ class Input {
    * @private
    */
   _handleEvent(event) {
-    if(event &amp;&amp; this.shouldCancelEvents) {
+    if(event && this.shouldCancelEvents) {
       event.preventDefault();
     }
   }
@@ -1130,7 +1102,7 @@ class Input {
   _lastWordBreakBeforeIndex(index) {
     var indexes = this._leftWordBreakIndexes();
     var result = indexes[0];
-    for (var i = 0, l = indexes.length; i &lt; l; i++) {
+    for (var i = 0, l = indexes.length; i < l; i++) {
       var wordBreakIndex = indexes[i];
       if (index > wordBreakIndex) {
         result = wordBreakIndex;
@@ -1155,7 +1127,7 @@ class Input {
   _leftWordBreakIndexes() {
     var result = [];
     var text = this.text();
-    for (var i = 0, l = text.length; i &lt; l; i++) {
+    for (var i = 0, l = text.length; i < l; i++) {
       if (hasLeftWordBreakAtIndex(text, i)) {
         result.push(i);
       }
@@ -1173,9 +1145,9 @@ class Input {
   _nextWordBreakAfterIndex(index) {
     var indexes = this.rightWordBreakIndexes().reverse();
     var result = indexes[0];
-    for (var i = 0, l = indexes.length; i &lt; l; i++) {
+    for (var i = 0, l = indexes.length; i < l; i++) {
       var wordBreakIndex = indexes[i];
-      if (index &lt; wordBreakIndex) {
+      if (index < wordBreakIndex) {
         result = wordBreakIndex;
       } else {
         break;
@@ -1187,26 +1159,3 @@ class Input {
 
 export { Input, KEYS, keyBindingsForPlatform };
 
-</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="KEYS.html">KEYS</a></li></ul>
-</nav>
-
-<br clear="both">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-dev</a> on Tue Nov 04 2014 12:15:41 GMT-0800 (PST)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
-</html>
