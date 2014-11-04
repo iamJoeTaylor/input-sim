@@ -1,6 +1,6 @@
 {
   "name": "input-sim",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Simulate keyboard events and selection ranges for inputs",
   "main": "dist/index.js",
   "jsnext:main": "lib/index.js",
