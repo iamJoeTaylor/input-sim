@@ -1,4 +1,4 @@
-import { Input, KEYS, keyBindingsForPlatform } from './index';
+import { Input, KEYS, keyBindingsForPlatform } from './input-sim';
 
 var InputSim = {
   Input: Input,

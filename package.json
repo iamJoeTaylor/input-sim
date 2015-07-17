@@ -1,9 +1,9 @@
 {
   "name": "input-sim",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "Simulate keyboard events and selection ranges for inputs",
-  "main": "dist/index.js",
-  "jsnext:main": "lib/index.js",
+  "main": "dist/input-sim.js",
+  "jsnext:main": "lib/input-sim.js",
   "scripts": {
     "build": "make",
     "test": "make test"
@@ -32,6 +32,7 @@
     "esnext": "^0.11.1",
     "jsdoc": "git://github.com/eventualbuddha/jsdoc.git#add-support-for-es6-classes",
     "karma": "^0.12.24",
+    "karma-chrome-launcher": "^0.2.0",
     "karma-mocha": "^0.1.9",
     "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^2.0.1",

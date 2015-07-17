@@ -17,7 +17,7 @@ module.exports = function(config) {
     files: [
       'node_modules/chai/chai.js',
       'node_modules/string-selection/dist/string-selection.js',
-      'dist/index.js',
+      'dist/input-sim.js',
       'test/dist/*.js'
     ],
 

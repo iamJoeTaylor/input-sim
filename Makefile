@@ -1,6 +1,6 @@
 NPMBIN = $(shell npm bin)
 ESNEXT = find . -name '*.js' && $(NPMBIN)/esnext -o ../lib $$(find . -name '*.js')
-MODULES = $(NPMBIN)/compile-modules convert -I lib -f bundle -o dist/index.js
+MODULES = $(NPMBIN)/compile-modules convert -I lib -f bundle -o dist/input-sim.js
 
 all: clean dist test docs
 
@@ -14,7 +14,7 @@ dist: build_source
 	$(MODULES) input-sim.umd
 
 test_build: clean_test_dist clean_test_lib
-	cd test/src && $(ESNEXT) && cd ../ && $(MODULES) lib/index.js
+	cd test/src && $(ESNEXT) && cd ../ && $(MODULES) lib/input-sim.js
 
 test: test_build
 	node_modules/karma/bin/karma start

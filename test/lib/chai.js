@@ -1,7 +1,7 @@
 import Selection from './selection';
 
-chai.use(function (_chai, utils) {
-  utils.addMethod(chai.Assertion.prototype, 'selected', function (description) {
+chai.use(function(_chai, utils) {
+  utils.addMethod(chai.Assertion.prototype, 'selected', function(description) {
     var inputText = this._obj.text();
     var inputSelectedRange = this._obj.selectedRange();
     var inputSelectedEnd = inputSelectedRange.start + inputSelectedRange.length;
