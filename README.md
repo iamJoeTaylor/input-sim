@@ -32,7 +32,7 @@ var input = new InputSim.Input('Mos Eisley');
 There are many methods available to control and modify this input.
 
 ```js
-input.deleteWordForward(); // input.text() -> 'Mos '
+input.deleteWordBackward(); // input.text() -> 'Mos '
 ```
 
 Please see our [documentation](docs/) for a more in depth overview.
