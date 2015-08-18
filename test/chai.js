@@ -1,4 +1,4 @@
-import Selection from './selection';
+import Selection from 'string-selection';
 
 chai.use(function (_chai, utils) {
   utils.addMethod(chai.Assertion.prototype, 'selected', function (description) {
