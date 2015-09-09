@@ -1,5 +1,5 @@
 import chai from './chai';
-import Selection from './selection';
+import Selection from 'string-selection';
 
 var Input = InputSim.Input;
 

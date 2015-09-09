@@ -1,3 +1,4 @@
 tmp
 test/dist
 test/tmp
+.build

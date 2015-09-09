@@ -16,9 +16,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/chai/chai.js',
-      'node_modules/string-selection/dist/string-selection.js',
       'dist/input-sim.js',
-      'test/dist/*.js'
+      'test/.build/test-bundle.js'
     ],
 
 
@@ -58,7 +57,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
