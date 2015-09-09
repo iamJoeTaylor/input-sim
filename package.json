@@ -33,7 +33,6 @@
     "karma": "^0.12.24",
     "karma-chrome-launcher": "^0.2.0",
     "karma-mocha": "^0.1.9",
-    "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^2.0.1",
     "rollup": "^0.14.0",
     "string-selection": "^2.1.1"
